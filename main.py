@@ -19,7 +19,7 @@ def reqeust_data_from_cb():
 
 def parsing_xml_currency(data):
     cb_data = reqeust_data_from_cb()
-    root = XML(cb_data)
+    root = et.XML(cb_data)
 
     currencies = {}
 
@@ -31,7 +31,7 @@ def parsing_xml_currency(data):
 
         currencies[code] = {
             'name': name,
-            'nominal': str(nominal),
+            'nominal': int(nominal),
             'value': float(value.replace(",", "."))
         }
 
@@ -54,7 +54,7 @@ def input_currency(currency_list):
     while True:
         currency = input("Введите валюту:")
 
-        if currency not in data:
+        if currency not in prepared_data:
             print("Такую валюту мы не поддреживаем")
         else:
             break
